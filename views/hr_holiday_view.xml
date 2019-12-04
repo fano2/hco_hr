@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<odoo>
+	<record id="edit_holiday_new_inherit" model="ir.ui.view">
+	  <field name="name">Leave Request Inherit</field>
+      <field name="model">hr.holidays</field>
+	  <field name="inherit_id" ref="hr_holidays.edit_holiday_new"/>
+	  <field name="arch" type="xml">
+	  	<xpath expr="/form/sheet/group/group/div/div" position="attributes">
+	  		<attribute name="attrs">{}</attribute>
+	  	</xpath>
+	  </field>
+	</record>
+</odoo>

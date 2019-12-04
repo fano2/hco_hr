@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	
+	<!-- Sequences for hr.invoice -->
+        <record id="seq_hr_invoice" model="ir.sequence">
+            <field name="name">Facture RH</field>
+            <field name="code">hr.invoice</field>
+            <field name="prefix">FA%(month)s%(year)s/</field>
+            <!-- <field name="suffix">/</field> -->
+            <field name="padding">2</field>
+            <field name="company_id" eval="False"/>
+        </record>
+</odoo>

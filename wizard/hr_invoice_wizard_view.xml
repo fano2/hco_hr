@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="view_hr_invoice_wizard_form" model="ir.ui.view">
+            <field name="name">hr.invoice.wizard.form</field>
+            <field name="model">hr.invoice.wizard</field>
+            <field name="arch" type="xml">
+            		<form string="Credit Note">
+                    <group>
+                         <group>
+                         <p>Appuyer sur le bouton créer pour créer la facture. </p>
+                         </group>
+                    </group>
+                    <footer>
+                        <button string='Créer Facture' name="create_hr_invoice" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>      
+            </field>
+    </record>
+    
+    <record id="action_hr_invoice_wizard" model="ir.actions.act_window">
+        <field name="name">Créer Factures</field>
+        <field name="res_model">hr.invoice.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+       <field name="view_id" ref="view_hr_invoice_wizard_form"/>
+       <field name="target">new</field>
+    </record>
+    
+    <act_window
+            id="action_hr_invoice_from_payslip_state"
+            name="Créer Facture"
+            res_model="hr.invoice.wizard"
+            src_model="hr.payslip.state"
+            view_mode="form"
+            multi="True"
+            target="new"
+            key2="client_action_multi"
+        />
+</odoo>

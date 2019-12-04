@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<report 
+            id="action_report_payslip_hco" 
+            model="hr.payslip" 
+            string="Bulletin de Paie"
+            report_type="qweb-pdf"
+            name="hco_hr.report_payslip_hr" 
+            file="Bulletin de paie"
+        />
+		
+		<report 
+            id="action_report_hr_invoice" 
+            model="hr.invoice" 
+            string="Facture"
+            report_type="qweb-pdf"
+            name="hco_hr.report_hr_invoice" 
+            file="Bulletin de paie"
+        />
+		
+	</data>
+</openerp>

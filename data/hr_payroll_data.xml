@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data noupdate="1">
+
+		<!-- Hr Category -->
+		<record id="INFO" model="hr.salary.rule.category">
+        <field name="name">INFO</field>
+        <field name="code">INFO</field>
+    </record>
+
+		<record id="PATRONAL" model="hr.salary.rule.category">
+        <field name="name">PATRONAL</field>
+        <field name="code">PATRONAL</field>
+    </record>
+
+
+		<!-- Hr Salary Rule -->
+		<record id="hr_rule_SBA" model="hr.salary.rule">
+            <field name="name">Salaire de base</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">SBA</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = contract.wage * payslip.rate / 100</field>
+        </record>
+
+        <record id="hr_rule_HS" model="hr.salary.rule">
+            <field name="name">Heures supplémentaires</field>
+            <field name="sequence" eval="2"/>
+            <field name="code">HS</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+
+res= payslip.amount_add_hours
+nb = res % 100
+result = (int(res/100) + 1) * 100 if nb > 0 else res
+			</field>
+        </record>
+
+        <record id="hr_rule_DVR" model="hr.salary.rule">
+            <field name="name">Divers ou prime</field>
+            <field name="sequence" eval="3"/>
+            <field name="code">DVR</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.DVR.amount if inputs.DVR and inputs.DVR.amount else 0
+            </field>
+        </record>
+
+        <record id="hr_rule_repas" model="hr.salary.rule">
+            <field name="name">Repas</field>
+            <field name="sequence" eval="4"/>
+            <field name="code">REPAS</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.REPAS.amount if inputs.REPAS and inputs.REPAS.amount else 0
+            </field>
+        </record>
+
+        <record id="hr_rule_PPN" model="hr.salary.rule">
+            <field name="name">PPN</field>
+            <field name="sequence" eval="4"/>
+            <field name="code">PPN</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.PPN.amount if inputs.PPN and inputs.PPN.amount else 0
+            </field>
+        </record>
+
+        <record id="hr_rule_PR" model="hr.salary.rule">
+            <field name="name">Prime</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">PR</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (inputs.PR.amount if inputs.PR and inputs.PR.amount else 0)</field>
+        </record>
+
+
+        <record id="hr_rule_SBR" model="hr.salary.rule">
+            <field name="name">Rémunération brut</field>
+            <field name="sequence" eval="10"/>
+            <field name="code">SBR</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = categories.BASIC</field>
+        </record>
+
+        <record id="hr_rule_CNAPS" model="hr.salary.rule">
+            <field name="name">Retenue CNAPS</field>
+            <field name="sequence" eval="13"/>
+            <field name="code">CNAPS</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+res = (SBR*employee.company_id.taux_cnaps/100 if SBR &lt; employee.company_id.plafond_cnaps else employee.company_id.plafond_cnaps*employee.company_id.taux_cnaps/100 )
+result = round(res)
+            </field>
+        </record>
+
+				<record id="hr_rule_CNAPS_PAT" model="hr.salary.rule">
+            <field name="name">Charges patronales CNAPS</field>
+            <field name="sequence" eval="50"/>
+            <field name="code">CNAPS_PAT</field>
+            <field name="category_id" ref="hco_hr.PATRONAL"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = (SBR*employee.company_id.taux_cnaps_patr/100 if SBR &lt; employee.company_id.plafond_cnaps else employee.company_id.plafond_cnaps*employee.company_id.taux_cnaps_patr/100 )
+            </field>
+        </record>
+
+        <record id="hr_rule_SI" model="hr.salary.rule">
+            <field name="name">Base imposable</field>
+            <field name="sequence" eval="16"/>
+            <field name="code">SI</field>
+            <field name="category_id" ref="INFO"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+res = SBR - categories.DED
+result = int(res/100) * 100
+</field>
+        </record>
+
+        <record id="hr_rule_IRSA" model="hr.salary.rule">
+            <field name="name">Retenue IRSA</field>
+            <field name="sequence" eval="18"/>
+            <field name="code">IRSA</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+if SBR &gt; employee.company_id.seuil_irsa :
+	res =(SI - employee.company_id.seuil_irsa) * employee.company_id.taux_irsa/100 - (employee.children*2000)
+else :
+	res = employee.company_id.abat_irsa
+
+result  =  res if res &gt; employee.company_id.abat_irsa  else employee.company_id.abat_irsa
+            </field>
+        </record>
+
+        <record id="hr_rule_RD" model="hr.salary.rule">
+            <field name="name">Retenues diverses</field>
+            <field name="sequence" eval="19"/>
+            <field name="code">RD</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (inputs.RD.amount if inputs.RD and inputs.RD.amount else 0 ) </field>
+        </record>
+
+        <record id="hr_rule_MAD" model="hr.salary.rule">
+            <field name="name">Total des deductions</field>
+            <field name="sequence" eval="20"/>
+            <field name="code">MAD</field>
+            <field name="category_id" ref="INFO"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = categories.DED</field>
+        </record>
+
+        <record id="hr_rule_NET" model="hr.salary.rule">
+            <field name="name">Montant de la paie</field>
+            <field name="sequence" eval="30"/>
+            <field name="code">NET</field>
+            <field name="category_id" ref="hr_payroll.NET"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result =  SBR - MAD</field>
+        </record>
+
+		<record id="hr_rule_AF" model="hr.salary.rule">
+            <field name="name">Allocation familiale</field>
+            <field name="sequence" eval="35"/>
+            <field name="code">AF</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = employee.nombre_enfant_cnaps * employee.company_id.amount_allocation</field>
+        </record>
+
+        <record id="hr_rule_DVRNET" model="hr.salary.rule">
+            <field name="name">Divers</field>
+            <field name="sequence" eval="36"/>
+            <field name="code">DVRNET</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (inputs.DVRNET.amount if inputs.DVRNET and inputs.DVRNET.amount else 0 ) </field>
+        </record>
+
+        <record id="hr_rule_AVS" model="hr.salary.rule">
+            <field name="name">Avance sur salaire</field>
+            <field name="sequence" eval="35"/>
+            <field name="code">AVS</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.AVS.amount if  inputs.AVS and inputs.AVS.amount else 0</field>
+        </record>
+
+		
+        
+         <record id='hr_rule_total_PATR' model="hr.salary.rule">
+        		<field name="name">Total charges patronales</field>
+        		<field name="sequence" eval="60"/>
+            <field name="code">TOTAL_PATRONAL</field>
+            <field name="category_id" ref="INFO"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = categories.PATRONAL  
+            </field>
+        </record>
+    
+    		
+        <record id='hr_rule_total_cout_person' model="hr.salary.rule">
+        		<field name="name">Coût total du personnel</field>
+        		<field name="sequence" eval="70"/>
+            <field name="code">TOTAL_COUT</field>
+            <field name="category_id" ref="INFO"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = categories.PATRONAL  + NET + categories.ALW 
+            </field>
+        </record>
+        
+        <record id="hr_rule_NETAPAYER" model="hr.salary.rule">
+            <field name="name">Net à payer</field>
+            <field name="sequence" eval="80"/>
+            <field name="code">NETAPAYER</field>
+            <field name="category_id" ref="hr_payroll.NET"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+res = NET + categories.ALW  - AVS
+nb = res % 100
+result = (int(res/100) + 1) * 100 if nb > 0 else res
+			</field>
+        </record>
+	    
+ 	
+		<!-- HR Rule input -->
+		 <!--  
+		 <record id="input_HT" model="hr.rule.input">
+		 	<field name="code">HT</field>
+		 	<field name="name">Nombre Heures Travaillées</field>
+		 	<field name="input_id" ref="hr_rule_SBA" />
+		 </record>
+		 -->
+		 
+		 <record id='input_PR' model="hr.rule.input">
+		 	<field name="code">PR</field>
+		 	<field name="name">Montant prime</field>
+		 	<field name="input_id" ref="hr_rule_PR" />
+		 </record>
+
+		 <record id='input_RD' model="hr.rule.input">
+		 	<field name="code">RD</field>
+		 	<field name="name">Montant retenues diverses</field>
+		 	<field name="input_id" ref="hr_rule_RD" />
+		 </record>
+
+		 <record id='input_DVR' model="hr.rule.input">
+		 	<field name="code">DVR</field>
+		 	<field name="name">Montant divers ou prime</field>
+		 	<field name="input_id" ref="hr_rule_DVR" />
+		 </record>
+
+		 <record id='input_REPAS' model="hr.rule.input">
+		 	<field name="code">REPAS</field>
+		 	<field name="name">Montant repas</field>
+		 	<field name="input_id" ref="hr_rule_repas" />
+		 </record>
+
+		 <record id='input_PPN' model="hr.rule.input">
+		 	<field name="code">PPN</field>
+		 	<field name="name">Montant PPN</field>
+		 	<field name="input_id" ref="hr_rule_PPN" />
+		 </record>
+
+
+		 <record id='input_AVS' model="hr.rule.input">
+		 	<field name="code">AVS</field>
+		 	<field name="name">Avance sur salaire</field>
+		 	<field name="input_id" ref="hr_rule_AVS" />
+		 </record>
+
+		 <record id='input_DVRNET' model="hr.rule.input">
+		 	<field name="code">DVRNET</field>
+		 	<field name="name">Montant divers</field>
+		 	<field name="input_id" ref="hr_rule_DVRNET" />
+		 </record>
+
+
+		 <!-- HR Structure Payroll -->
+		<record id="structure_base_gasy" model="hr.payroll.structure">
+            <field name="code">SSG</field>
+            <field name="name">Structure Salariale Gasy</field>
+            <field name="parent_id" eval="False" />
+            <field eval="[(4, ref('hr_rule_SBA')), (4, ref('hr_rule_HS')),(4, ref('hr_rule_DVR')),
+            (4, ref('hr_rule_PPN')), (4, ref('hr_rule_repas')),
+            (4, ref('hr_rule_SBR')), (4, ref('hr_rule_CNAPS')),
+			(4, ref('hr_rule_CNAPS_PAT')), (4, ref('hr_rule_SI')), 
+			(4, ref('hr_rule_IRSA')), (4, ref('hr_rule_RD')),
+            (4, ref('hr_rule_MAD')), (4, ref('hr_rule_NET')), (4, ref('hr_rule_AF')), (4, ref('hr_rule_DVRNET')), (4, ref('hr_rule_AVS')), (4, ref('hr_rule_NETAPAYER')),
+            (4, ref('hr_rule_total_PATR')), (4, ref('hr_rule_total_cout_person'))
+            ]" name="rule_ids"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+	</data>
+	<data noupdate="0">
+		
+        <record id="hco_hr.hr_rule_SBA" model="hr.salary.rule">
+            <field name="amount_python_compute">result = contract.wage * payslip.rate / 100</field>
+        </record>
+
+        <record id="hr_rule_IT" model="hr.salary.rule">
+            <field name="name">Indemnité de transport</field>
+            <field name="sequence" eval="2"/>
+            <field name="code">IT</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.IT.amount * payslip.rate / 100 if inputs.IT and inputs.IT.amount else 0
+			</field>
+        </record>
+
+        <record id='input_IT' model="hr.rule.input">
+		 	<field name="code">IT</field>
+		 	<field name="name">Montant indemnité de Transport</field>
+		 	<field name="input_id" ref="hr_rule_IT" />
+		 </record>
+
+        <record id="hr_rule_RS" model="hr.salary.rule">
+            <field name="name">Rappel Salaire</field>
+            <field name="sequence" eval="2"/>
+            <field name="code">RT</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.RS.amount  if inputs.RS and inputs.RS.amount else 0
+			</field>
+        </record>
+
+        <record id='input_RS' model="hr.rule.input">
+		 	<field name="code">RS</field>
+		 	<field name="name">Montant rappel salaire</field>
+		 	<field name="input_id" ref="hr_rule_RS" />
+		 </record>
+
+
+		<record id="hr_rule_HS_130" model="hr.salary.rule">
+            <field name="name">Heures supplémentaires 30%</field>
+            <field name="sequence" eval="2"/>
+            <field name="code">HS130</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+res= payslip.amount_hours130
+nb = res % 100
+result = (int(res/100) + 1) * 100 if nb > 0 else res
+			</field>
+        </record>
+        
+        <record id="hr_rule_HS_150" model="hr.salary.rule">
+            <field name="name">Heures supplémentaires 50%</field>
+            <field name="sequence" eval="3"/>
+            <field name="code">HS150</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+res= payslip.amount_hours150
+nb = res % 100
+result = (int(res/100) + 1) * 100 if nb > 0 else res
+			</field>
+        </record>
+        
+        <record id="hr_rule_total_cotisation" model="hr.salary.rule">
+            <field name="name">Total cotisation</field>
+            <field name="sequence" eval="14"/>
+            <field name="code">TOTCOT</field>
+            <field name="category_id" ref="INFO"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = categories.DED</field>
+        </record>
+        
+        <record id="hr_rule_Abattement" model="hr.salary.rule">
+            <field name="name">Abattement</field>
+            <field name="sequence" eval="15"/>
+            <field name="code">ABAT</field>
+            <field name="category_id" ref="INFO"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = employee.company_id.seuil_irsa
+            </field>
+        </record>
+        
+        <record id="structure_base_malagasy" model="hr.payroll.structure">
+            <field name="code">SMG</field>
+            <field name="name">Structure Salariale Malagasy</field>
+            <field name="parent_id" eval="False" />
+            <field eval="[(4,ref('hr_rule_SBA')),
+            (4, ref('hr_rule_IT')), (4, ref('hr_rule_RS')),
+            (4, ref('hr_rule_HS_130')), (4, ref('hr_rule_HS_150')),(4,ref('hr_rule_DVR')),
+            (4,ref('hr_rule_PPN')), (4,ref('hr_rule_repas')),
+            (4,ref('hr_rule_SBR')), (4,ref('hr_rule_CNAPS')),
+			(4,ref('hr_rule_CNAPS_PAT')), (4, ref('hr_rule_total_cotisation')), (4, ref('hr_rule_Abattement')), (4,ref('hr_rule_SI')), 
+			(4,ref('hr_rule_IRSA')), (4,ref('hr_rule_RD')),
+            (4,ref('hr_rule_MAD')), (4,ref('hr_rule_NET')), (4,ref('hr_rule_AF')), (4,ref('hr_rule_DVRNET')), (4,ref('hr_rule_AVS')), (4,ref('hr_rule_NETAPAYER')),
+            (4,ref('hr_rule_total_PATR')), (4,ref('hr_rule_total_cout_person'))
+            ]" name="rule_ids"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        
+	</data>
+</openerp>

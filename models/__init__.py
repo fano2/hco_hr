@@ -1,0 +1,7 @@
+import hr_health_organization
+import res_company_inherit
+import hr_contract
+import hr_payslip
+import hr_employee
+import hr_invoice
+import hr_salary_rule

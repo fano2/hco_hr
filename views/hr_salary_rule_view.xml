@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="hr_salary_rule_form_inherit" model="ir.ui.view">
+            <field name="name">hr.salary.rule.form.inherit</field>
+            <field name="model">hr.salary.rule</field>
+            <field name="inherit_id" ref="hr_payroll.hr_salary_rule_form" />
+            <field name="arch" type="xml">
+            		<field name="amount_select" position="before">
+            			<field name="is_dynamic" /><newline/>
+            		</field>
+            		<field name="amount_select" position="attributes">
+            			<attribute name="attrs">{'invisible':[('is_dynamic','=', True)]}</attribute>
+            		</field>
+            		<field name="amount_python_compute" position="attributes">
+            			<attribute name="attrs">{'invisible':['|', ('amount_select','&lt;&gt;','code'), ('is_dynamic', '=', True)], 'required':[('amount_select','=','code')]}</attribute>
+            		</field>
+            		<field name="active" position="after">
+            			<field name="account_id" />
+						<field name="is_compute_prorata" />
+            		</field>
+            </field>
+   </record>
+</odoo>

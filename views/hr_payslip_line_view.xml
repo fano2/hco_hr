@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record id="view_hr_payslip_line_state_tree" model="ir.ui.view">
+            <field name="name">hr.payslip.line.tree.state</field>
+            <field name="model">hr.payslip.line</field>
+            <field name="arch" type="xml">
+                <tree decoration-info="total == 0">
+                    <field name="slip_id" />
+                    <field name="employee_id"/>
+                    <field name="name"/>
+                    <field name="total"/>
+                    <field name="payslip_run_id"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="action_hr_payslip_line_state" model="ir.actions.act_window">
+	        <field name="name">Ligne de paie</field>
+	        <field name="res_model">hr.payslip.line</field>
+	        <field name="view_type">form</field>
+	        <field name="view_mode">tree</field>
+	       <field name="view_id" ref="view_hr_payslip_line_state_tree"/>
+	       <field name="domain">[('appears_on_payslip', '=', True), ('slip_id.state', '=', 'done')]</field>
+	    </record>
+    
+    		<menuitem
+		     id="menu_hr_payslip_line_state"
+		     parent="hr_payroll.menu_hr_payroll_root"
+		     name="Ligne de Paie"
+		     action="action_hr_payslip_line_state"
+		     />
+        
+	</data>	
+</openerp>

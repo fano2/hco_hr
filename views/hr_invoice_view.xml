@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- View Invoice Line -->
+  <record id="hr_invoice_line_tree" model="ir.ui.view">
+    <field name="name">hr.invoice.line.tree</field>
+    <field name="model">hr.invoice.line</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="employee_id" />
+            <field name="wage_net" />
+            <field name="wage_brut" />
+            <field name="amount_cnaps" />
+            <field name="amount_ostie" />
+            <field name="amount_medgest" />
+            <field name="irsa" />
+            <field name="thirteen_month" />
+            <field name="currency_id" invisible="True" />
+
+        </tree>
+    </field>
+  </record>
+
+  <record id="hr_invoice_tree" model="ir.ui.view">
+    <field name="name">hr.invoice.tree</field>
+    <field name="model">hr.invoice</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="name" />
+            <field name="wage_net" />
+            <field name="wage_brut" />
+            <field name="amount_cnaps" />
+            <field name="amount_ostie" />
+            <field name="amount_medgest" />
+            <field name="irsa" />
+            <field name="thirteen_month" />
+            <field name="taux_commission" />
+            <field name="amount_comission" />
+            <field name="currency_id" invisible="True" />
+            <field name="amount_TTC" />
+        </tree>
+    </field>
+  </record>
+
+  <record id="hr_invoice_form_view" model="ir.ui.view">
+    <field name="name">hr.invoice.form</field>
+    <field name="model">hr.invoice</field>
+    <field name="arch" type="xml">
+        <form>
+        		<header>
+				<button name="action_done" type="object" string="Cloturer" attrs="{'invisible':[('state', 'not in', ('draft'))]}" 
+					class="oe_highlight"/>
+				<button name="action_cancel" type="object" string="Cancel" attrs="{'invisible':[('state', 'in', ('draft', 'cancel'))]}" />
+				<button name="export_invoice" type="object" string="Export" />
+				<field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,done"/>
+			</header>
+            <sheet>
+                <group>
+                  <group>
+                    <field name="name" readonly="1"/>
+                    <field name="partner_id" context="{'default_customer': True, 'default_supplier': False}" />
+                    <field name="wage_brut"/>
+                    <field name="amount_cnaps"/>
+                    <field name="amount_medgest"/>
+                    <field name="amount_ostie"/>
+                    <field name="irsa"/>
+                    <field name="wage_net"/>
+                    <field name="thirteen_month" />
+                    <label for="taux_commission"/>
+                    <div class="o_row">
+                    		<field name="taux_commission"/><span>%</span> 
+                    </div>
+                    <field name="amount_comission"/>
+                    <field name="designation"/>
+                    <field name="designation_other" />
+                    <field name="amount_other" />
+                    <field name="amount_HT"/>
+                    <field name="taxe_id"/>
+                    <field name="amount_taxe"/>
+                    <field name="amount_TTC"/>
+                    <field name="currency_id" invisible="True" />
+                  </group>
+                  <group>
+                      <field name="create_date" string="Créé le " />
+                      <field name="payment_term_id" string="Condition de paiement"/>
+                  </group>
+                  
+                  
+              </group>
+              <notebook>
+              	<page name="invoice_line" string="Lignes">
+              		<field name="hr_invoice_line_ids" />
+              	</page>
+              </notebook>
+            </sheet>
+        </form>
+    </field>
+ </record>
+
+  <record id="action_hr_invoice" model="ir.actions.act_window">
+      <field name="name">Factures</field>
+      <field name="res_model">hr.invoice</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+  </record>
+
+ <menuitem
+   id="menu_hr_invoice"
+   parent="hr_payroll.menu_hr_payroll_root"
+   name="Factures"
+   action="action_hr_invoice"
+   />
+</odoo>

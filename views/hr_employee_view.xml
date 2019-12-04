@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		
+		<record id="view_employee_form_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form" />
+            <field name="arch" type="xml">
+	            	<field name="identification_id" position="after">
+	            		<field name="matricule" />
+	            		<field name="indice" />
+	            		<field name="classification" />
+	            	</field>
+	            	<field name="mobile_phone" position="after">
+	            		<field name="num_domicile" />
+	            	</field> 
+            		<field name="category_ids" position="attributes">
+            			<attribute name="placeholder">Etiquetttes</attribute>
+            		</field>
+            		<xpath expr="//h1" position="replace">
+            			<h4>
+            				<field name="name" placeholder="Nom Employé" />
+							<div style="height:20px;"></div>
+            				<field name="firstname" placeholder="Prenom Employé"/>
+            			</h4>
+            		</xpath>
+            		<field name="address_home_id" position="replace">
+            			<field name="address_home_id" invisible="1"/>
+            			<label for="street" string="Adresse"/>
+					<div class="o_address_format">
+						<field name="street" placeholder="Rue..." class="o_address_street" />
+						<field name="street2" placeholder="Rue 2..." class="o_address_street" />
+						<field name="city" placeholder="Ville" class="o_address_city" />
+						<field name="zip" placeholder="Code postal" class="o_address_zip" />
+					</div>
+            		</field>
+				<xpath expr="//page[2]" position="after">
+					<page name="history_salary" string="Historique des salaires" groups="hr_payroll.group_hr_payroll_manager">
+            				<field name="contract_salary_ids" readonly="1">
+            					<tree>
+            						<field name="date" />
+            						<field name="contract_id" />
+            						<field name="amount" />
+            					</tree>
+            				</field>
+            			</page>
+				</xpath>
+            </field>
+       </record>
+       
+       <record id="hr_hr_employee_view_form2" model="ir.ui.view">
+            <field name="name">hr.hr.employee.view.form2.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr_contract.hr_hr_employee_view_form2"/>
+            <field name="arch" type="xml">
+            	<field name="medic_exam" position="before">
+            		<field name="num_cnaps" />
+            	</field>
+            	<field name="children" position="after">
+            		<field name="nombre_enfant_cnaps" />
+            	</field>
+            </field>
+      </record>
+            		
+	</data>
+</openerp>

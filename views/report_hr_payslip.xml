@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<template id="report_payslip_page">
+		   <t t-call="hco_hr.external_layout_paie">
+			<div class="page">
+				<style type="text/css">
+			       	.table-payslip > thead > tr,
+			        .table-payslip > thead > tr > th {
+			        		border: 1px solid black;
+			        }
+			        .table-payslip > tbody > tr > td {
+			        		border-top: 0;
+			        		border-left: 1px solid black;
+			        		border-right: 1px solid black;
+			        		borde-bottom: 0;
+			        }
+			        .page {
+			        		font-size: 10px;
+			        }
+			        .border-all,
+			        .border-all > td {
+			        		border: 1px solid black;
+			        }
+			        subtotal,
+			        td.subtotal {
+			        		border-top: 1px solid black !important;
+			        }
+			    </style>
+				<!--DECLARATION VARIABLE SBA-->
+				<t t-set="SBA" t-value="o.company_id"></t>
+			
+                <h3 class="text-center">BULLETIN DE PAIE </h3>
+                <!-- <p t-field="o.name"/> -->
+
+                <div class="row mt8 head">
+	                	<div class="col-xs-5" >
+	                		<strong><span t-field="o.employee_id.name"/> </strong> <br/>
+	                		<strong><span t-field="o.employee_id.firstname" /></strong> <br/>
+	                		<span t-field="o.employee_id.street" /> <span t-field="o.employee_id.street2"/>
+	                		<span t-field="o.employee_id.city" /> <span t-field="o.employee_id.zip" />
+	                	</div>
+	                	<div class="col-xs-3" >
+	                		<strong>Période du :</strong> <span t-field="o.date_from"/>  <br/>
+	                		Paiement le <span t-field="o.date_to"/><br/>
+	                		<span t-field="o.employee_id.bank_account_id"/><br/>
+	                		Matricule: <span t-field="o.employee_id.matricule" /> <br/>
+	                	</div>
+	                	<div class="col-xs-1">
+	                		au <br/>
+	                		par  
+	                	</div>
+	                	<div class="col-xs-2">
+	                		<span t-field="o.date_to"/> <br/>
+	                		<span t-field="o.payment_mode"/>
+	                	</div>
+                </div> 
+                <div class="row">
+                			<div class="col-xs-offset-5 col-xs-6" >
+                				Ancienneté : <span t-field="o.seniority" /> <br/>
+                			</div>
+                </div>
+                <div class="row mt8" style="font-style: 8px;">
+                		<div class="col-xs-2" >
+                			<strong>Nbr enfants</strong> <br/>
+                			<strong>Emploi</strong> <br/>
+                			<strong>Qualification</strong>
+                		</div>
+                		<div class="col-xs-3" >
+                			<span t-field="o.employee_id.children" /> <br/>
+                			<span t-field="o.contract_id.job_id.name" /> <br/>
+                			<span t-field="o.employee_id.classification" />
+                		</div>
+                		<div class="col-xs-3 test">
+                			N°CNAPS <br/>
+                			Situation matrimoniale <br/>
+                			Carte d'identité nationale n° <br/>
+                		</div>
+                		<div class="col-xs-3" >
+                			<span t-field="o.employee_id.num_cnaps" /> <br/>
+                			<span t-field="o.employee_id.marital" /> <br/>
+                			<span t-field="o.employee_id.identification_id" />
+                		</div>
+                </div>
+                
+                <table class="table table-payslip mt8">
+                	<thead>
+                		<tr class="text-center bold" >
+                			<th class="text-center bold">N°Compte</th>
+                			<th class="text-center bold">Désignation</th>
+                			<th class="text-center bold">Nbr</th>
+                			<th class="text-center bold">Base</th>
+                			<th class="text-center bold">Taux</th>
+                			<th class="text-center bold">Gain</th>
+                			<th class="text-center bold">Retenues</th>
+                		</tr>
+                	</thead>
+                	
+                	<tbody>
+                		<t t-foreach="o.line_ids.filtered(lambda line: line.salary_rule_id.appears_on_payslip)" t-as="p">
+							<!--define value SBR-->
+							<t t-if="p.salary_rule_id.code == 'SBR'">
+								<t t-set="SBR" t-value="p.amount"></t>
+							</t>
+
+                			<tr style="page-break-inside: avoid;" t-if="p.salary_rule_id.code not in ('NETAPAYER', 'TOTAL_PATRONAL','TOTAL_COUT')" >
+	                			<td class="text-right"><span t-field="p.salary_rule_id.account_id.code"/></td>
+	                			<td><span t-field="p.name"/></td>
+	                			<td>
+									<t t-if="p.salary_rule_id.is_compute_prorata">
+										<span t-field="o.nb_days"/>
+									</t>
+									<t t-if="p.code == 'AF'">
+										<span t-field="o.employee_id.nombre_enfant_cnaps"/>
+									</t>
+								</td>
+	                			<td t-if="p.salary_rule_id.category_id.code in('BASIC','DED')" class="text-right">
+	                				<t t-if="p.code == 'SBA'">
+	                					<span t-field="o.contract_id.wage" />
+	                				</t>
+									<t t-if="p.code == 'CNAPS' or p.salary_rule_id.code == o.contract_id.hr_health_id.code ">
+										<span t-esc="SBR" t-if="o.employee_id.company_id.plafond_cnaps &gt; SBR "  t-options="{'widget': 'float', 'precision': 2}" />
+										<span t-field="o.employee_id.company_id.plafond_cnaps" t-if="SBR  &gt; o.employee_id.company_id.plafond_cnaps" />
+									</t>
+
+	                				<t t-if="p.code not in ('SBR', 'SBA', 'CNAPS', 'IRSA') and p.salary_rule_id.code != o.contract_id.hr_health_id.code ">
+	                					<span t-field="p.amount"/>
+	                				</t>
+	                			</td>
+	                			<td t-if="p.salary_rule_id.category_id.code not in('BASIC','DED')">
+	                			</td>
+	                			<td class="text-right">
+	                				<t t-if="p.salary_rule_id.code == o.contract_id.hr_health_id.code " >
+	                					<span t-field="o.contract_id.hr_health_id.taux_emp"/> %
+	                				</t>
+	                				<t t-if="p.salary_rule_id.code  == ''.join([o.contract_id.hr_health_id.code or '', '_PAT'])" >
+	                					<span t-field="o.contract_id.hr_health_id.taux_pat"/> %
+	                				</t>
+	                				<t t-if="p.salary_rule_id.code == 'SBA'">
+	                					<span t-field="o.rate"/> %
+	                				</t>
+	                				<t t-if="p.salary_rule_id.code == 'IRSA'">
+
+	                				</t>
+	                				<t t-if="p.salary_rule_id.code == 'CNAPS'">
+	                					<span t-field="o.employee_id.company_id.taux_cnaps"/> %
+	                				</t>
+	                				<t t-if="p.salary_rule_id.code == 'CNAPS_PAT'">
+	                					<span t-field="o.employee_id.company_id.taux_cnaps_patr"/> %
+	                				</t>
+	                			</td>
+	                			
+	                			<t t-if="p.salary_rule_id.category_id.code in ('BASIC', 'NET', 'ALW') or p.salary_rule_id.code == 'SI'">
+	                				<t t-if="p.salary_rule_id.code=='SBR'">
+		                				<td class="subtotal text-right">
+		                					<span t-field="p.amount"/>
+		                				</td>
+	                				</t>
+	                				<t t-if="p.salary_rule_id.code!='SBR'">
+		                				<td class="text-right">
+		                					<span t-field="p.amount"/>
+		                				</td>
+	                				</t>
+	                			</t>
+	                			<t t-if="p.salary_rule_id.category_id.code not in ('BASIC', 'NET', 'ALW')">
+	                				<td></td>
+	                			</t>
+	                			
+	                			<t t-if="p.salary_rule_id.category_id.code in ('DED', 'INFO', 'PATRONAL') or p.salary_rule_id.code in ('MAD', 'TOTCOT')">
+	                				<t t-if="p.salary_rule_id.code in ('MAD', 'TOTCOT')">
+		                				<td class="subtotal text-right">
+		                					<span t-field="p.amount"/>
+		                				</td>
+	                				</t>
+	                				<t t-if="p.salary_rule_id.code not in ('MAD', 'TOTCOT', 'SI')">
+		                				<td class="text-right">
+		                					<span t-field="p.amount"/>
+		                				</td>
+	                				</t>
+	                			</t>
+	                			<t t-if="p.salary_rule_id.category_id.code not in ('DED', 'INFO', 'PATRONAL') and p.salary_rule_id.code not in ('MAD', 'TOTCOT')">
+	                				<td></td>
+	                			</t>
+                			
+                			</tr>
+                			<tr style="page-break-inside: avoid;" class="bold" t-if="p.salary_rule_id.code in ( 'TOTAL_PATRONAL','TOTAL_COUT')" >
+	                			<td class="text-right"><span t-field="p.salary_rule_id.account_id.code"/></td>
+	                			<td><strong><span t-field="p.name"/></strong></td>
+	                			<td></td>
+	                			<td t-if="p.salary_rule_id.category_id.code in('BASIC','DED')" class="text-right">
+	                				<span t-field="p.amount"/></td>
+	                			<td t-if="p.salary_rule_id.category_id.code not in('BASIC','DED')">
+	                			</td>
+	                			<td class="text-right"> </td>
+	                			
+	                			<t t-if="p.salary_rule_id.code == 'NETAPAYER'">
+	                				<td class="text-right">
+	                					<span t-field="p.amount"/>
+	                				</td>
+	                			</t>
+	                			<t t-if="p.salary_rule_id.code != 'NETAPAYER'">
+	                				<td></td>
+	                			</t>
+	                			
+	                			<td class="text-right"><span t-field="p.amount"/></td>
+                			
+                			</tr>
+                			<tr t-if="p.salary_rule_id.code =='NETAPAYER'" style="page-break-inside: avoid; height: 100px;" class="border-all bold">
+	                			<td colspan="2" class="text-center">
+									<strong>
+										Emargement <br/>
+										<div class="row">
+											<span class="col-xs-6">Employé</span>
+											<span class="col-xs-6">Employeur</span>
+										</div>
+									</strong>
+
+								</td>
+								<td colspan="3" class="text-right bold"><strong> NET A PAYER</strong></td>
+								<td class="text-center bold"><strong> <span t-field="p.amount"/> <span t-field="o.company_id.currency_id.symbol"/></strong> </td>
+	                			<td class="text-right bold"></td>
+	                		</tr>
+                		</t>
+                		
+                		
+                		<tr style="page-break-inside: avoid;" class="border-all text-center">
+                			<td colspan="3"  rowspan="2" class="text-center bold"> <strong>Congés</strong></td>
+                			<td rowspan="2" >
+                				Ancien solde <br/>
+                				<span t-esc="'{0:,.1f}'.format(o.employee_id.remaining_leaves + o.get_holidays_in_period() - o.get_last_hr_holidays() ).replace('.', ',')"/>
+                			</td>
+                			<td rowspan="2">
+                				Acquis <br/>
+                				<span t-esc="'{0:,.1f}'.format(o.get_last_hr_holidays()).replace('.', ',')" />
+                			</td>
+                			<td rowspan="2">
+                				Pris <br/>
+                				<span t-esc="'{0:,.1f}'.format(o.get_holidays_in_period()).replace('.', ',')" />
+                			</td>
+                			<td rowspan="2">
+                				Nouv. solde <br/>
+                				<span t-field="o.employee_id.remaining_leaves" />
+                			</td>
+                		</tr>
+                	</tbody>
+                	
+                </table>
+              
+            </div>
+          </t>
+		</template>
+		
+		
+		<template id="report_payslip_hr">
+		    <t t-call="report.html_container">
+		        <t t-foreach="docs" t-as="o">
+		            	<t t-set="conge_pris" t-value="0"/>
+   					<t t-foreach="o.worked_days_line_ids" t-as="l">
+						<t t-if="l.code != 'WORK100'">
+							<t t-set="conge_pris" t-value="conge_pris + l.number_of_days" />
+						</t>
+   					</t>
+   					<t t-call="hco_hr.report_payslip_page"/>
+   					<!--  Second page -->
+   						<t t-call="hco_hr.report_payslip_page"/>
+		        </t>
+		    </t>
+		</template>
+
+		<delete id="hr_payroll.payslip_details_report" model="ir.actions.report.xml">
+		</delete>
+
+		<delete id="hr_payroll.action_contribution_register" model="ir.actions.report.xml">
+		</delete>
+
+		<delete id="hr_payroll.action_report_payslip" model="ir.actions.report.xml">
+		</delete>
+		
+	</data>
+</openerp>

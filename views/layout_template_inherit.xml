@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<template id="external_layout_paie">
+	    <!-- Multicompany -->
+	    <t t-if="not o and doc">
+	        <t t-set="o" t-value="doc"/>
+	    </t>
+	    <t t-if="o and 'company_id' in o">
+	        <t t-set="company" t-value="o.company_id"></t>
+	    </t>
+	    <t t-if="not o or not 'company_id' in o">
+	        <t t-set="company" t-value="res_company"></t>
+	    </t>
+
+	    <t t-call="hco_hr.external_layout_header_paie" />
+	    <t t-raw="0" />
+	    <t t-call="hco_hr.external_layout_footer" />
+	</template>
+
+
+	<template id="external_layout_header_paie">
+	    <div class="header">
+	        <div class="row  bold" style="font-size:11px;font-style: bold;">
+	        		<div class="col-xs-3 line-height: 5px; float: none; display:inline-block; vertical-align: middle;">
+	        			<img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="height: 170px;" />
+	        		</div>
+	        		<div class="col-xs-9 text-right" style="margin-top: 5px; line-height: 5px; float: none; display:inline-block; vertical-align: middle;">
+	        		<strong >
+						<div style="" >
+							<p t-if="company.activity" t-field="company.activity"  />
+						</div>
+
+	        			<!--<span t-field="company.name" /> <span t-field="company.street" /> <span t-field="company.street2"/> - <span t-if="company.city" t-field="company.city" /> <span t-if="company.zip"/> <span  t-if="company.country_id" t-field="company.country_id" /> <br/>-->
+	        			<!--NIF: <span  t-field="company.nif" /> - STAT: <span   t-field="company.stat" /> - Tél:<span t-field="company.phone"/> - email:<span t-field="company.email"/>-->
+	        		</strong>
+	        		</div>
+			</div>
+	    </div>
+	</template>
+	
+	<template id="external_layout_footer">
+	    <div class="footer">
+	        <div class="text-center" style="border-top: 1px solid black;">
+				Capital Social: <span t-field="company.capital_social" /> - <span t-field="company.street"/>, <span t-field="company.street2"/>, <span t-field="company.zip"/> <span t-field="company.city"/> <br/>
+				RCS: <span t-field="company.rcs" /> - Statistique: <span t-field="company.stat"/> - NIF: <span t-field="company.nif"/> <br/>
+				Téléphone: <span t-field="company.phone"/> - Email: <span t-field="company.email"/>
+	        </div>
+			<p class="text-center">
+				<strong>Ce bulletin de paie a été établi  par KENTIA-RH.COM</strong>
+			</p>
+	    </div>      
+	</template>
+</odoo>

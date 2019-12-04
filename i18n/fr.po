@@ -1,0 +1,811 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* hco_hr
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e-20170711\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-11-19 23:25+0000\n"
+"PO-Revision-Date: 2018-11-20 02:26+0300\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: fr\n"
+"X-Generator: Poedit 2.2\n"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_designation_other
+msgid " Autre Designation"
+msgstr " Autre Designation"
+
+#. module: hco_hr
+#: model:ir.model,name:hco_hr.model_hr_invoice_line
+msgid " Ligne dans Facture RH"
+msgstr " Ligne dans Facture RH"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_line_thirteen_month
+msgid "13 è Mois"
+msgstr "13 è Mois"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_contract_thirteen_month
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_thirteen_month
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_state_thirteen_month
+msgid "13 ème Mois"
+msgstr "13 ème Mois"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.external_layout_header_paie
+msgid ""
+"<br/>\n"
+"\t\t\t\t<strong style=\"font-size:12px;\">NIF: </strong>"
+msgstr ""
+"<br/>\n"
+"\t\t\t\t<strong style=\"font-size:12px;\">NIF: </strong>"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_payslip_page
+msgid ""
+"<br/>\n"
+"                \t\t<strong>Ancienneté :</strong>"
+msgstr ""
+"<br/>\n"
+"                \t\t<strong>Ancienneté :</strong>"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_payslip_page
+msgid ""
+"<br/>\n"
+"                \t\t<strong>Classe  :</strong>"
+msgstr ""
+"<br/>\n"
+"                \t\t<strong>Classe  :</strong>"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_payslip_page
+msgid ""
+"<br/>\n"
+"                \t\t<strong>Date d'entrée :</strong>"
+msgstr ""
+"<br/>\n"
+"                \t\t<strong>Date d'entrée :</strong>"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_payslip_page
+msgid ""
+"<br/>\n"
+"                \t\t<strong>Fonction :</strong>"
+msgstr ""
+"<br/>\n"
+"                \t\t<strong>Fonction :</strong>"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_payslip_page
+msgid ""
+"<br/>\n"
+"                \t\t<strong>Numéro CNAPS :</strong>"
+msgstr ""
+"<br/>\n"
+"                \t\t<strong>Numéro CNAPS :</strong>"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_payslip_page
+msgid ""
+"<br/>\n"
+"                \t\t<strong>Paie du :</strong>"
+msgstr ""
+"<br/>\n"
+"                \t\t<strong>Paie du :</strong>"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_payslip_page
+msgid "<span style=\"font-weight:bold\">L'Employé</span>"
+msgstr "<span style=\"font-weight:bold\">L'Employé</span>"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.external_layout_header_paie
+msgid "<strong style=\"font-size:12px;\"> - RCS= </strong>"
+msgstr "<strong style=\"font-size:12px;\"> - RCS= </strong>"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.external_layout_header_paie
+msgid "<strong style=\"font-size:12px;\"> - STAT:</strong>"
+msgstr "<strong style=\"font-size:12px;\"> - STAT:</strong>"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_payslip_page
+msgid "<strong>CIN :</strong>"
+msgstr "<strong>CIN :</strong>"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_hr_invoice
+msgid "<strong>CLIENT :</strong>"
+msgstr "<strong>CLIENT :</strong>"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_hr_invoice
+msgid "<strong>Condition de règlement: </strong><br/>"
+msgstr "<strong>Condition de règlement: </strong><br/>"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_hr_invoice
+msgid "<strong>Le service Facturation</strong>"
+msgstr "<strong>Le service Facturation</strong>"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_payslip_page
+msgid "<strong>Nom et Prénoms:</strong>"
+msgstr "<strong>Nom et Prénoms:</strong>"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_hr_invoice
+msgid "<strong>Total</strong>"
+msgstr "<strong>Total</strong>"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_payslip_page
+msgid "A DEDUIRE"
+msgstr "A DEDUIRE"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_payslip_page
+msgid "A PAYER"
+msgstr "A PAYER"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_res_company_abat_irsa
+msgid "Abattement IRSA"
+msgstr "Abattement IRSA"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_seniority
+msgid "Ancienneté"
+msgstr "Ancienneté"
+
+#. module: hco_hr
+#: selection:hr.invoice,state:0
+msgid "Annulé"
+msgstr "Annulé"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_hr_invoice
+msgid "Antananarivo, le"
+msgstr "Antananarivo, le"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.view_hr_invoice_wizard_form
+msgid "Appuyer sur le bouton créer pour créer la facture."
+msgstr "Appuyer sur le bouton créer pour créer la facture."
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_hr_invoice
+msgid "Arrêtée la présente facture à la somme de:"
+msgstr "Arrêtée la présente facture à la somme de:"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_payslip_page
+msgid "BULLETIN DE PAIE"
+msgstr "BULLETIN DE PAIE"
+
+#. module: hco_hr
+#: selection:hr.invoice,state:0
+msgid "Brouillon"
+msgstr "Brouillon"
+
+#. module: hco_hr
+#: model:ir.actions.report.xml,name:hco_hr.action_report_payslip_hco
+msgid "Bulletin de Paie"
+msgstr "Bulletin de Paie"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_hours_payslip_id
+msgid "Bulletin de paie"
+msgstr "Bulletin de paie"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_line_amount_cnaps
+msgid "CNAPS "
+msgstr "CNAPS "
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_state_cnaps_emp
+msgid "CNAPS Employé"
+msgstr "CNAPS Employé"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_state_cnaps_pat
+msgid "CNAPS Patronal"
+msgstr "CNAPS Patronal"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_payslip_page
+msgid "CONGES PAYES"
+msgstr "CONGES PAYES"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.hr_invoice_form_view
+#: model:ir.ui.view,arch_db:hco_hr.view_hr_invoice_wizard_form
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_employee_classification
+msgid "Classification Professsionnelle"
+msgstr "Classification Professsionnelle"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_partner_id
+msgid "Client"
+msgstr "Client"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.hr_invoice_form_view
+msgid "Cloturer"
+msgstr "Cloturer"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_amount_comission
+msgid "Comission"
+msgstr "Comission"
+
+#. module: hco_hr
+#: model:ir.model,name:hco_hr.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.hr_invoice_form_view
+msgid "Condition de paiement"
+msgstr "Condition de paiement"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.view_company_form_inherit
+msgid "Configuration RH"
+msgstr "Configuration RH"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_employee_num_domicile
+msgid "Contact Domicile"
+msgstr "Contact Domicile"
+
+#. module: hco_hr
+#: model:ir.model,name:hco_hr.model_hr_invoice_wizard
+msgid "Create wizard based to selected lines"
+msgstr "Create wizard based to selected lines"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_create_uid
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_line_create_uid
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_wizard_create_uid
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_hours_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_create_date
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_line_create_date
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_wizard_create_date
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_hours_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.view_hr_invoice_wizard_form
+msgid "Credit Note"
+msgstr "Avoir"
+
+#. module: hco_hr
+#: model:ir.actions.act_window,name:hco_hr.action_hr_invoice_from_payslip_state
+#: model:ir.ui.view,arch_db:hco_hr.view_hr_invoice_wizard_form
+msgid "Créer Facture"
+msgstr "Créer Facture"
+
+#. module: hco_hr
+#: model:ir.actions.act_window,name:hco_hr.action_hr_invoice_wizard
+msgid "Créer Factures"
+msgstr "Créer Factures"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.hr_invoice_form_view
+msgid "Créé le"
+msgstr "Créé le"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_payslip_page
+msgid "DEDUCTION REGLEMENTAIRE"
+msgstr "DEDUCTION REGLEMENTAIRE"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_hr_invoice
+msgid "DESIGNATION"
+msgstr "DESIGNATION"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_state_date_from
+msgid "Date"
+msgstr "Date "
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_designation
+msgid "Designation"
+msgstr "Designation"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_contract_currency_id
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_currency_id
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_line_currency_id
+msgid "Devise"
+msgstr "Devise"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_display_name
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_line_display_name
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_wizard_display_name
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_hours_display_name
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_state_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_hours_hours_done
+msgid "Effectues"
+msgstr "Effectues"
+
+#. module: hco_hr
+#: model:ir.model,name:hco_hr.model_hr_employee
+msgid "Employee"
+msgstr "Employé"
+
+#. module: hco_hr
+#: model:ir.model,name:hco_hr.model_hr_contract
+msgid "Employee Contract"
+msgstr "Contrat de l'employé"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_line_employee_id
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_state_employee_id
+msgid "Employé"
+msgstr "Employé"
+
+#. module: hco_hr
+#: selection:hr.payslip,payment_mode:0
+msgid "Espece"
+msgstr "Espece"
+
+#. module: hco_hr
+#: model:ir.actions.act_window,name:hco_hr.action_hr_payslip_state
+#: model:ir.ui.menu,name:hco_hr.menu_hr_payslip_state
+#: model:ir.ui.view,arch_db:hco_hr.view_hr_payslip_state_pivot
+msgid "Etat de Paie"
+msgstr "Etat de Paie"
+
+#. module: hco_hr
+#: model:ir.model,name:hco_hr.model_hr_payslip_state
+msgid "Etat de paie"
+msgstr "Etat de paie"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.view_employee_form_inherit
+msgid "Etiquetttes"
+msgstr "Etiquetttes"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.hr_invoice_form_view
+msgid "Export"
+msgstr "Exporter"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_hr_invoice
+msgid "FACTURE N°"
+msgstr "FACTURE N°"
+
+#. module: hco_hr
+#: model:ir.actions.report.xml,name:hco_hr.action_report_hr_invoice
+msgid "Facture"
+msgstr "Facture"
+
+#. module: hco_hr
+#: model:ir.model,name:hco_hr.model_hr_invoice
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_line_hr_invoice_id
+msgid "Facture RH"
+msgstr "Facture RH"
+
+#. module: hco_hr
+#: model:ir.actions.act_window,name:hco_hr.action_hr_invoice
+#: model:ir.ui.menu,name:hco_hr.menu_hr_invoice
+msgid "Factures"
+msgstr "Factures"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_hours_code
+msgid "H.S Hebdomadaire"
+msgstr "H.S Hebdomadaire"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_hours_hs130
+msgid "HS 130"
+msgstr "HS 130"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_hours_hs150
+msgid "HS 150"
+msgstr "HS 150"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_payslip_hours_ids
+msgid "Heures Supplementaires"
+msgstr "Heures Supplementaires"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.view_hr_payslip_form_inherit
+msgid "Heures Supplémentaires"
+msgstr "Heures Supplémentaires"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_id
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_line_id
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_wizard_id
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_hours_id
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_state_id
+msgid "ID"
+msgstr "ID"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_payslip_page
+msgid "INTITULE"
+msgstr "INTITULE"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_line_irsa
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_state_irsa
+msgid "IRSA 20%"
+msgstr "IRSA 20%"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_employee_indice
+msgid "Indice"
+msgstr "Indice"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_line_is_compute_prorata
+#: model:ir.model.fields,field_description:hco_hr.field_hr_salary_rule_is_compute_prorata
+msgid "Is compute prorata ?"
+msgstr "Calculé au prorata?"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_line_is_dynamic
+#: model:ir.model.fields,field_description:hco_hr.field_hr_salary_rule_is_dynamic
+msgid "Is dynamic Rule ?"
+msgstr "Est une règle dynamique ?"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice___last_update
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_line___last_update
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_wizard___last_update
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_hours___last_update
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_state___last_update
+msgid "Last Modified on"
+msgstr "Dernière Modification le"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_line_write_uid
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_wizard_write_uid
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_write_uid
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_hours_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_line_write_date
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_wizard_write_date
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_write_date
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_hours_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.hr_invoice_form_view
+msgid "Lignes"
+msgstr "Lignes"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_hr_invoice_line_ids
+msgid "Lignes Factures"
+msgstr "Lignes Factures"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_line_amount_medgest
+msgid "MEDGEST"
+msgstr "MEDGEST"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_state_medgest_emp
+msgid "MEDGEST Employé"
+msgstr "MEDGEST Employé"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_state_medgest_pat
+msgid "MEDGEST Patronal"
+msgstr "MEDGEST Patronal"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_hr_invoice
+msgid "MONTANT H.T"
+msgstr "MONTANT H.T"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_employee_matricule
+msgid "Matricule"
+msgstr "Matricule"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_payment_mode
+msgid "Mode de paiement"
+msgstr "Mode de paiement"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_hours_subtotal_add_hours
+msgid "Montant"
+msgstr "Montant"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_res_company_amount_allocation
+msgid "Montant Allocation Familiale"
+msgstr "Montant Allocation Familiale"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_amount_HT
+msgid "Montant HT"
+msgstr "Montant HT"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_amount_TTC
+msgid "Montant TTC"
+msgstr "Montant TTC"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_amount_other
+msgid "Montant autre"
+msgstr "Montant autre"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_amount_in_text
+msgid "Montant en Texte"
+msgstr "Montant en Texte"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_contract_amount_by_hour
+msgid "Montant par Heure"
+msgstr "Montant par Heure"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.view_employee_form_inherit
+msgid "Nom Employé"
+msgstr "Nom Employé"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_employee_nombre_enfant_cnaps
+msgid "Nombre d'enfant allouée CNaPS"
+msgstr "Nombre d'enfant allouée CNaPS"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_employee_num_cnaps
+msgid "Numero CNAPS"
+msgstr "Numero CNAPS"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_line_amount_ostie
+msgid "OSTIE"
+msgstr "OSTIE"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_state_ostie_emp
+msgid "OSTIE Employé"
+msgstr "OSTIE Employé"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_state_ostie_pat
+msgid "OSTIE Patronal"
+msgstr "OSTIE Patronal"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.view_company_form_inherit
+msgid "Paramètres Employeur"
+msgstr "Paramètres Employeur"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.view_company_form_inherit
+msgid "Paramètres Employée"
+msgstr "Paramètres Employée"
+
+#. module: hco_hr
+#: model:ir.model,name:hco_hr.model_hr_payslip
+msgid "Pay Slip"
+msgstr "Feuille de paie"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_payment_term_id
+msgid "Payment Terms"
+msgstr "Conditions de règlement"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_res_company_plafond_cnaps
+msgid "Plafond Cnaps"
+msgstr "Plafond Cnaps"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_payslip_page
+msgid "Pris"
+msgstr "Pris"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_name
+msgid "Reference"
+msgstr "Référence"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_payslip_page
+msgid "Restant"
+msgstr "Restant"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_hours_wage_by_hours
+msgid "Salaire / Heures"
+msgstr "Salaire / Heures"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_line_wage_brut
+msgid "Salaire BRUT"
+msgstr "Salaire BRUT"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_state_wage_brut
+msgid "Salaire Brut"
+msgstr "Salaire Brut"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_line_wage_net
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_state_wage_net
+msgid "Salaire Net"
+msgstr "Salaire Net"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_res_company_seuil_irsa
+msgid "Seuil IRSA"
+msgstr "Seuil IRSA"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_state
+msgid "State"
+msgstr "État"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_payslip_page
+msgid "TAUX"
+msgstr "TAUX"
+
+#. module: hco_hr
+#: model:ir.ui.view,arch_db:hco_hr.report_hr_invoice
+msgid "TOTAL"
+msgstr "TOTAL"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_hours_amount_hs130
+msgid "TOtal 130"
+msgstr "TOtal 130"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_amount_taxe
+#: model:ir.ui.view,arch_db:hco_hr.report_hr_invoice
+msgid "TVA"
+msgstr "TVA"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_res_company_taux_cnaps
+msgid "Taux Cnaps"
+msgstr "Taux Cnaps"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_taux_commission
+msgid "Taux Comission"
+msgstr "Taux Comission"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_res_company_taux_irsa
+msgid "Taux IRSA"
+msgstr "Taux IRSA"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_res_company_taux_medgest
+msgid "Taux MedGest"
+msgstr "Taux MedGest"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_res_company_taux_ostie
+msgid "Taux Ostie"
+msgstr "Taux Ostie"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_res_company_taux_cnaps_patr
+msgid "Taux Patronal CNAPS"
+msgstr "Taux Patronal CNAPS"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_res_company_taux_medgest_patr
+msgid "Taux Patronal MEDGEST"
+msgstr "Taux Patronal MEDGEST"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_res_company_taux_ostie_patr
+msgid "Taux Patronal OSTIE"
+msgstr "Taux Patronal OSTIE"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_taxe_id
+msgid "Taxe"
+msgstr "Taxe"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_amount_add_hours
+msgid "Total"
+msgstr "Total"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_payslip_hours_amount_hs150
+msgid "Total 150"
+msgstr "Total 150"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_amount_cnaps
+msgid "Total CNAPS "
+msgstr "Total CNAPS "
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_irsa
+msgid "Total IRSA"
+msgstr "Total IRSA"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_amount_medgest
+msgid "Total MEDGEST"
+msgstr "Total MEDGEST"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_amount_ostie
+msgid "Total OSTIE"
+msgstr "Total OSTIE"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_wage_brut
+msgid "Total Salaire BRUT"
+msgstr "Total Salaire BRUT"
+
+#. module: hco_hr
+#: model:ir.model.fields,field_description:hco_hr.field_hr_invoice_wage_net
+msgid "Total Salaire Net"
+msgstr "Total Salaire Net"
+
+#. module: hco_hr
+#: selection:hr.invoice,state:0
+msgid "Validé"
+msgstr "Validé"
+
+#. module: hco_hr
+#: selection:hr.payslip,payment_mode:0
+msgid "Virement"
+msgstr "Virement"
+
+#. module: hco_hr
+#: model:ir.model,name:hco_hr.model_hr_payslip_hours
+msgid "hr.payslip.hours"
+msgstr "hr.payslip.hours"
+
+#. module: hco_hr
+#: model:ir.model,name:hco_hr.model_hr_salary_rule
+msgid "hr.salary.rule"
+msgstr "hr.salary.rule"

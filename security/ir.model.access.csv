@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_payslip_hours,access_hr_payslip_hours,model_hr_payslip_hours,,1,1,1,1
+access_hr_invoice,access_hr_invoice,model_hr_invoice,,1,1,1,1
+access_hr_invoice_line,access_hr_invoice_line,model_hr_invoice_line,,1,1,1,1
+access_hr_payslip_state,access_hr_payslip_state,model_hr_payslip_state,,1,1,1,1
+access_hr_contract_salary_history,access_hr_contract_salary_history,model_hr_contract_salary_history,,1,1,1,1
+access_hr_health_organization,access_hr_health_organization,model_hr_health_organization,,1,1,1,1

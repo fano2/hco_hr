@@ -1,0 +1,1 @@
+import hr_invoice_wizard
