@@ -2,8 +2,9 @@
 
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
-
-from openerp import api, models, fields
+from odoo.exceptions import UserError
+from openerp import api, models, fields, tools, _
+from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 
 MODE_PAYMENT = [
     ('espece', u'Espece'),
@@ -70,8 +71,18 @@ class HrPayslip(models.Model):
     nb_day_leave = fields.Integer("Jour Manqué", default=0)
     rate = fields.Integer("Taux", compute='_compute_rate')
     nb_days = fields.Integer("Nbr de jour travaillé", compute='_compute_rate')
-    stc = fields.Boolean(string='STC')
-    half_salary = fields.Boolean(string='Demi-salaire')
+
+    stc = fields.Boolean('STC')
+    half_salary = fields.Boolean('Demi-salaire')
+    priornotice = fields.Float(u"Préavis", store=True)
+    average_gross_notice = fields.Float(u"SBR moyen préavis", store=True, compute='compute_sheet') #, compute='get_average_gross_notice'
+    average_gross = fields.Float("SBR Moyen", store=True, compute='compute_sheet') #, compute='get_average_gross'
+    rest_leave = fields.Float(string=u"Congé payé", store=True)#, compute='_rest_leave'
+    preavis = fields.Float(store=True, compute='get_preavis')
+    additional_gross = fields.Float("SBR additionnel", store=True, delault=0.00)
+
+
+    #sbr moyen et sbr moyen preavis
 
     @api.multi
     def get_last_hr_holidays(self):
@@ -82,6 +93,19 @@ class HrPayslip(models.Model):
                 ('type', '=', 'add'), ('state', 'in', ('validate', 'validate'))], order='date_to desc', limit=1)
             print('last holiday', last_holiday.number_of_days)
         return last_holiday.number_of_days
+
+    @api.depends('employee_id')
+    def get_preavis(self):
+        payslip2obj = self.search([('employee_id', '=', self.employee_id.id), ('date_from', '<', self.date_from)], limit=2, order='date_from desc')
+        if payslip2obj:
+            sum_amount = 0.0
+            i = 1
+            for payslip in payslip2obj:
+                payslip_lineobj = self.env['hr.payslip.line'].search([('slip_id', '=', payslip.id), ('code', '=', 'SBR')])
+                if payslip_lineobj:
+                    sum_amount += payslip_lineobj.mapped('amount')[0]
+                    i += 1
+            self.preavis = sum_amount / i    
 
     @api.multi
     def get_holidays_in_period(self):
@@ -110,6 +134,80 @@ class HrPayslip(models.Model):
 
         return res
 
+    def get_average_gross_funct(self):
+        average_gross = 0.0
+        if self.employee_id:
+            date_start = self.env['hr.contract'].search([('employee_id', '=', self.employee_id.id)]).mapped(
+                'date_start')
+            payslip_line_obj = self.env['hr.payslip.line']
+            if date_start:
+                date_start = datetime.strptime(date_start[0], tools.DEFAULT_SERVER_DATE_FORMAT)
+                date_from = datetime.strptime(self.date_from, tools.DEFAULT_SERVER_DATE_FORMAT)
+                seniority = self.diff_month(date_from, date_start)
+                if seniority < 12 and seniority != 0:
+                    payslips = self.search([('employee_id', '=', self.employee_id.id), ('date_from', '<', self.date_from)])
+                    average_gross_done = 0.0
+                    for payslip in payslips:
+                        if payslip_line_obj.search([('slip_id', '=', payslip.id), ('code', '=', 'SBR')]).mapped('amount'):
+                            average_gross_done += payslip_line_obj.search([('slip_id', '=', payslip.id), ('code', '=', 'SBR')]).mapped('amount')[0]
+                    average_gross = (average_gross_done + self.additional_gross) / seniority
+                elif seniority > 12:
+                    payslip_line_obj_last_year = self.search([('employee_id', '=', self.employee_id.id), ('date_from', '<', self.date_from)], limit=12)
+                    average_gross_last_year = 0.0
+                    for payslip_line in payslip_line_obj_last_year:
+
+                        if payslip_line_obj.search([('slip_id', '=', payslip_line.id), ('code', '=', 'SBR')]).mapped('amount'):
+                            average_gross_last_year += payslip_line_obj.search([('slip_id', '=', payslip_line.id), ('code', '=', 'SBR')]).mapped('amount')[0]
+                    average_gross = (average_gross_last_year + self.additional_gross) / 12
+                else:
+                    average_gross = 0.0
+            else:
+                raise UserError(_('la date debut de contrat est vide'))
+        else:
+            self.average_gross = 0.0
+        return average_gross    
+        
+    def get_average_gross_notice_funct(self):
+        average_gross_notice = 0.0
+        if self.employee_id:
+            date_start = self.env['hr.contract'].search([('employee_id', '=', self.employee_id.id)]).mapped(
+                'date_start')
+            payslip_line = self.env['hr.payslip.line']
+            if date_start:
+                date_start = datetime.strptime(date_start[0], tools.DEFAULT_SERVER_DATE_FORMAT)
+                date_from = datetime.strptime(self.date_from, tools.DEFAULT_SERVER_DATE_FORMAT)
+                seniority = self.diff_month(date_from, date_start)
+                print (seniority)
+                if seniority >= 2:
+                    payslip2obj = self.search([('employee_id', '=', self.employee_id.id), ('date_from', '<', self.date_from)], limit=2, order='date_from desc')
+                    sum_gross_done_notice = 0.0
+                    for payslip in payslip2obj:
+                        if payslip_line.search([('slip_id', '=', payslip.id), ('code', '=', 'SBR')]):
+                            sum_gross_done_notice += payslip_line.search([('slip_id', '=', payslip.id), ('code', '=', 'SBR')]).mapped('amount')[0]
+                    average_gross_notice = (sum_gross_done_notice + self.additional_gross) / seniority
+                elif seniority < 2 and seniority > 0:
+                    sum_gross_done = 0.0
+                    payslips = self.search([('employee_id', '=', self.employee_id.id)])
+
+                    for payslip in payslips:
+                        if payslip_line.search([('slip_id', '=', payslip.id), ('code', '=', 'SBR')]):
+                            sum_gross_done += payslip_line.search([('slip_id', '=', payslip.id), ('code', '=', 'SBR')]).mapped('amount')[0]
+                    average_gross_notice = (sum_gross_done + self.additional_gross) / seniority
+                elif seniority < 0:
+                    raise UserError(_("la date de paiement doit être superieur à l'ancienneté"))
+                else:
+                    average_gross_notice = 0.0
+            else:
+                raise UserError(_("cet employer n'a pas encore de contrat"))
+        else:
+            self.average_gross_notice = 0.0
+        return average_gross_notice   
+
+    def diff_month(self, d1, d2):
+        diff = (d1.year - d2.year) * 12 + d1.month - d2.month
+        return diff     
+
+    
     # OMG, just for name
     @api.model
     def get_payslip_lines(self, contract_ids, payslip_id):
@@ -261,6 +359,26 @@ class HrPayslip(models.Model):
                     blacklist += [id for id, seq in rule._recursive_search_of_rules()]
 
         return [value for code, value in result_dict.items()]
+
+    #calcule de la SBR moyen
+
+
+
+    @api.multi
+    def compute_sheet(self):
+        for payslip in self:
+            number = payslip.number or self.env['ir.sequence'].next_by_code('salary.slip')
+            # delete old payslip lines
+            payslip.line_ids.unlink()
+            # set the list of contract for which the rules have to be applied
+            # if we don't give the contract, then the rules to apply should be for all current contracts of the employee
+            contract_ids = payslip.contract_id.ids or \
+                           self.get_contract(payslip.employee_id, payslip.date_from, payslip.date_to)
+            lines = [(0, 0, line) for line in self.get_payslip_lines(contract_ids, payslip.id)]
+            payslip.write({'line_ids': lines, 'number': number})
+            self.average_gross = self.get_average_gross_funct()
+            self.average_gross_notice = self.get_average_gross_notice_funct()
+        return True    
 
 
 class HrPayslipHourAdditionnal(models.Model):

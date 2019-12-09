@@ -13,8 +13,14 @@
         <field name="code">PATRONAL</field>
     </record>
 
+    <record id="hr_payroll.PREAVIS" model="hr.salary.rule.category">
+        <field name="name">PREAVIS</field>
+        <field name="code">PREAVIS</field>
+    </record>
+
 
 		<!-- Hr Salary Rule -->
+
 		<record id="hr_rule_SBA" model="hr.salary.rule">
             <field name="name">Salaire de base</field>
             <field name="sequence" eval="1"/>
@@ -91,6 +97,29 @@ result = (int(res/100) + 1) * 100 if nb > 0 else res
             <field name="amount_select">code</field>
             <field name="amount_python_compute">result = categories.BASIC</field>
         </record>
+
+        <record id="hr_holiday_rest"  model="hr.salary.rule">
+            <field name="name">Congé payé</field>
+            <field name="sequence" eval="11"/>
+            <field name="code">CP</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+             <field name="amount_python_compute">result = payslip.rest_leave * payslip.average_gross / payslip.nb_day_base</field>
+        </record>
+
+         <record id="hr_payroll_rules_preavis" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.PREAVIS"/>
+            <field name="name">PREAVIS</field>
+            <field name="code">PV</field>
+            <field name="sequence" eval="12"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">if payslip.priornotice > 0 and payslip.stc:
+    result = payslip.preavis
+elif payslip.priornotice &lt; 0 and payslip.stc:
+    result = -payslip.preavis</field>
+    </record>
 
         <record id="hr_rule_CNAPS" model="hr.salary.rule">
             <field name="name">Retenue CNAPS</field>
@@ -421,7 +450,7 @@ result = (int(res/100) + 1) * 100 if nb > 0 else res
 			(4,ref('hr_rule_CNAPS_PAT')), (4, ref('hr_rule_total_cotisation')), (4, ref('hr_rule_Abattement')), (4,ref('hr_rule_SI')), 
 			(4,ref('hr_rule_IRSA')), (4,ref('hr_rule_RD')),
             (4,ref('hr_rule_MAD')), (4,ref('hr_rule_NET')), (4,ref('hr_rule_AF')), (4,ref('hr_rule_DVRNET')), (4,ref('hr_rule_AVS')), (4,ref('hr_rule_NETAPAYER')),
-            (4,ref('hr_rule_total_PATR')), (4,ref('hr_rule_total_cout_person'))
+            (4,ref('hr_rule_total_PATR')), (4,ref('hr_rule_total_cout_person')), (4, ref('hr_payroll_rules_preavis')), (4, ref('hr_holiday_rest'))
             ]" name="rule_ids"/>
             <field name="company_id" ref="base.main_company"/>
         </record>

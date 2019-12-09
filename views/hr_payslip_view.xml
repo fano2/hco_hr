@@ -1,54 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-	<data>
-		
-		<record id="view_hr_payslip_form_inherit" model="ir.ui.view">
+<odoo>
+    <data>
+        <record id="view_hr_payslip_form_inherit" model="ir.ui.view">
             <field name="name">hr.payslip.form.inherit.hco</field>
             <field name="model">hr.payslip</field>
-            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form" />
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
             <field name="arch" type="xml">
-            	<field name="paid" position="after">
-            		<field name="payment_mode" />
-            		<field name="seniority" />
-            	</field>
-            	<xpath expr="//group[1]" position="after">
-	            	<group>
-	            		<group>
-	            			<field name="nb_day_base"/>
-	            			<field name="nb_day_leave"/>
-	            			<field name="nb_days"/>
-	            		</group>
-                              <group>
-                                    <field name="stc"/>
-                                    <field name="half-salary"/>
-                              <group>
-	            	</group>
-            	</xpath>
-            	<xpath expr='//notebook' position="inside">
-            		<page string="Heures Supplémentaires">
-            			<field name="payslip_hours_ids">
-            				<tree create="0" delete="0" editable="bottom">
-            					<field name="code" />
-            					<field name="hours_done" />
-            					<field name="hs130" />
-            					<field name="hs150" />
-            					<field name="wage_by_hours" />
-            					<field name="amount_hs130" />
-            					<field name="amount_hs150" />
-            					<field name="subtotal_add_hours" />
-            				</tree>
-            			</field>
-            			<group>
-            				<group class="oe_subtotal_footer oe_right">
-            					<field name="amount_hours130" />
-            					<field name="amount_hours150" />
-            					<field name="amount_add_hours" />
-            				</group>
-            			</group>
-            		</page>
-            	</xpath>
+                <field name="paid" position="after">
+                    <field name="payment_mode"/>
+                    <field name="seniority"/>
+                </field>
+                <xpath expr="//group[1]" position="after">
+                    <group>
+                        <group>
+                            <field name="nb_day_base"/>
+                            <field name="nb_day_leave"/>
+                            <field name="nb_days"/>
+                        </group>
+                        <group>
+							 <field name="stc"/>
+							 <field name="half_salary"/>
+						</group>
+                        <group>
+                            <field name="rest_leave" attrs="{'invisible':[('stc','=',False)],'readonly':False}"/>
+                            <field name="priornotice" attrs="{'invisible':[('stc','=',False)],'readonly':False}"/>
+                            <field name="average_gross" attrs="{'invisible':[('stc','=',False)],'readonly':True}"/>
+                            <field name="average_gross_notice" attrs="{'invisible':[('stc','=',False)],'readonly':True}"/>
+                            <field name="additional_gross" attrs="{'invisible':[('stc','=',False)],'readonly':False}"/>
+                        </group>
+                    </group>
+                </xpath>
+                <xpath expr='//notebook' position="inside">
+                    <page string="Heures Supplémentaires">
+                        <field name="payslip_hours_ids">
+                            <tree create="0" delete="0" editable="bottom">
+                                <field name="code"/>
+                                <field name="hours_done"/>
+                                <field name="hs130"/>
+                                <field name="hs150"/>
+                                <field name="wage_by_hours"/>
+                                <field name="amount_hs130"/>
+                                <field name="amount_hs150"/>
+                                <field name="subtotal_add_hours"/>
+                            </tree>
+                        </field>
+                        <group>
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="amount_hours130"/>
+                                <field name="amount_hours150"/>
+                                <field name="amount_add_hours"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
             </field>
-       </record>
-		
-	</data>
-</openerp>
+        </record>
+
+    </data>
+</odoo>
